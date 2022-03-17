@@ -1,0 +1,23 @@
+{% extends 'authapp/base.html' %}
+
+{% block title %} CreateRoom {% endblock %}
+
+{% block content %}
+    <form method="POST" action="">
+        {% csrf_token %}
+    <table class="table">
+        <tbody style="padding:5px ">
+            {% for r in rows %}
+                <tr>
+                    {% for c in cols %}
+                        <td><input name="{{ r }}_{{ c }}" type="number" min="0" value="0" style="width:50px"></td>
+                    {% endfor %}
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}

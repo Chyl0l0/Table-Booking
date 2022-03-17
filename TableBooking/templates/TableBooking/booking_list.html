@@ -1,0 +1,14 @@
+{% extends "authapp/base.html" %}
+
+{% block title %} My Bookings {% endblock %}
+
+{% block content %}
+    {% for booking in user_bookings%}
+    <ul class="card" style="background-color: rgba(230, 167, 86, 0.9)">
+        <li>Table: {{ booking.table }}</li>
+        <li>Date: {{ booking.date }}</li>
+        <li>Time: {{ booking.time }}</li>
+        <li>Duration: {{ booking.duration }}</li>
+    </ul>
+    {% endfor %}
+{% endblock content %}

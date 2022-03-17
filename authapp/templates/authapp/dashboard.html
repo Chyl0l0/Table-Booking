@@ -1,0 +1,12 @@
+{% extends "authapp/base.html" %}
+{% include "TableBooking/booking_list.html" %}
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<h1>{{welcome}}</h1>
+<br><a href=" {% if request.user.is_staff %} {% url 'today-bookings' %} {% else %} {% url 'user-bookings' %} {% endif %}"  class="btn btn-primary">View Bookings</a>
+<br><br>
+<a href="{% url 'authapp:edit' %}" class="btn btn-primary">Edit Your Profile</a>
+{#<a href="{% url 'authapp:password_change' %}" class="btn btn-warning">Change your password</a>#}
+<hr>
+{% endblock content %}

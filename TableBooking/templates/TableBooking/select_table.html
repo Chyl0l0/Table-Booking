@@ -1,0 +1,75 @@
+{% extends 'authapp/base.html' %}
+{% load crispy_forms_tags %}
+{% load tags %}
+{% block title %} SelectTable {% endblock %}
+
+{% block content %}
+
+    <style>
+        label {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+
+        }
+
+        label [type="radio"] {
+            display: none;
+        }
+
+        [type="radio"] + span {
+            display: table;
+            padding: 1em;
+            width: 50px;
+            height: 50px;
+            margin: auto;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 30px;
+
+        }
+
+        :checked + span {
+            background: #0f0;
+            display: table;
+
+        }
+
+        [type="radio"][disabled] + span {
+            background: #f00;
+
+        }
+
+        [type="radio"][disabled][unavailable] + span {
+            background: #303030;
+        }
+    </style>
+<h1>Please select a table</h1> <br>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table  >
+            <tbody >
+            {% for x,y,t,s in tables %}
+                {% if y|divisibleby:cols %}
+                <tr  >
+                {% endif %}
+                <td >
+
+                    <label>
+                        <script>ok = true</script>
+                        <input type="radio" name="radAnswer" value="{{ x }}_{{ y }}" {% if s == 'unavailable' %} disabled unavailable {% elif s == 'reserved' %} disabled {% endif %}>
+                        <span >{% if t > 0 %} {{ t }} {% else %}  {% endif %}</span>
+                    </label>
+
+                </td>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <input class="btn btn-primary" type="submit" value="Submit">
+
+    </form>
+
+
+{% endblock %}
